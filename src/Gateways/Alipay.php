@@ -53,7 +53,7 @@ class Alipay implements GatewayApplicationInterface
             'method'      => '',
             'format'      => 'JSON',
             'charset'     => 'utf-8',
-            'sign_type'   => 'RSA2',
+            'sign_type'   => $this->config->get('sign_type'),//'RSA2', //'RSA', 
             'version'     => '1.0',
             'return_url'  => $this->config->get('return_url'),
             'notify_url'  => $this->config->get('notify_url'),

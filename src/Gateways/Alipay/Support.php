@@ -91,7 +91,7 @@ class Support
      *
      * @return string
      */
-    public static function generateSign(array $parmas, $privateKey = null): string
+    public static function generateSign(array $parmas, $privateKey = null, $sign_type='RSA2'): string
     {
         if (is_null($privateKey)) {
             throw new InvalidConfigException('Missing Alipay Config -- [private_key]', 1);
@@ -105,7 +105,12 @@ class Support
                 "\n-----END RSA PRIVATE KEY-----";
         }
 
-        openssl_sign(self::getSignContent($parmas), $sign, $privateKey, OPENSSL_ALGO_SHA256);
+        if($sign_type == 'RSA2'){
+            openssl_sign(self::getSignContent($parmas), $sign, $privateKey, OPENSSL_ALGO_SHA256);
+        }else{
+            openssl_sign(self::getSignContent($parmas), $sign, $privateKey);
+        }
+        
 
         return base64_encode($sign);
     }

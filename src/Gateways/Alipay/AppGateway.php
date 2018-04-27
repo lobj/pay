@@ -45,7 +45,7 @@ class AppGateway implements GatewayInterface
             json_decode($payload['biz_content'], true),
             ['product_code' => $this->getProductCode()]
         ));
-        $payload['sign'] = Support::generateSign($payload, $this->config->get('private_key'));
+        $payload['sign'] = Support::generateSign($payload, $this->config->get('private_key'),$this->config->get('sign_type'));
 
         Log::debug('Paying An App Order:', [$endpoint, $payload]);
 
